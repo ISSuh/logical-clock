@@ -60,7 +60,7 @@ func (c *HLC) Increase() {
 	c.m.Lock()
 	defer c.m.Unlock()
 
-	c.physicalTime++
+	c.physicalTime = time.Now().UnixNano()
 	c.logicalTime++
 }
 

@@ -49,8 +49,9 @@ func (c *LamportClock) Increase() {
 
 // Update update the logical time to the maximum of the current time and the other time
 func (c *LamportClock) Update(other uint64) {
-	if other > atomic.LoadUint64(&c.time) {
-		atomic.CompareAndSwapUint64(&c.time, c.time, other)
+	currentTime := atomic.LoadUint64(&c.time)
+	if other > currentTime {
+		atomic.CompareAndSwapUint64(&c.time, currentTime, other)
 	}
 }
 

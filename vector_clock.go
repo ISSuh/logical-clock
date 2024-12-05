@@ -77,5 +77,10 @@ func (c *VectorClock) Time(node string) uint64 {
 func (c *VectorClock) Times() map[string]uint64 {
 	c.m.RLock()
 	defer c.m.RUnlock()
-	return c.clock
+
+	copy := make(map[string]uint64)
+	for k, v := range c.clock {
+		copy[k] = v
+	}
+	return copy
 }

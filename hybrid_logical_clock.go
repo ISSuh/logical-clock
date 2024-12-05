@@ -76,10 +76,10 @@ func (c *HLC) Update(physicalTime int64, logicalTime uint64) {
 	} else {
 		c.physicalTime = physicalTime
 
-		if logicalTime < c.logicalTime {
-			c.logicalTime++
-		} else {
+		if logicalTime >= c.logicalTime {
 			c.logicalTime = logicalTime + 1
+		} else {
+			c.logicalTime++
 		}
 	}
 }
